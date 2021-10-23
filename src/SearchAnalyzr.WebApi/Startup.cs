@@ -10,6 +10,7 @@ using SearchAnalyzr.WebApi.Interfaces;
 using SearchAnalyzr.WebApi.Services;
 using System;
 using System.Net.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SearchAnalyzr.WebApi
 {
@@ -24,7 +25,11 @@ namespace SearchAnalyzr.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(setup => {
+                setup.ReturnHttpNotAcceptable = true;
+                setup.CacheProfiles.Add("SearchCacheProfile", new CacheProfile() { Duration = 60 });
+            });
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Search Analyzr Web API", Version = "v1" });
@@ -57,7 +62,7 @@ namespace SearchAnalyzr.WebApi
                 var exception = context.Features
                     .Get<IExceptionHandlerPathFeature>()
                     .Error;
-                var response = new { statusCode = context.Response.StatusCode, message = exception.Message };
+                var response = new { code = context.Response.StatusCode, message = exception.Message };
                 await context.Response.WriteAsJsonAsync(response);
             }));
 

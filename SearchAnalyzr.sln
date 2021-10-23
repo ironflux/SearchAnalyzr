@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAnalyzr.WebApi", "src\SearchAnalyzr.WebApi\SearchAnalyzr.WebApi.csproj", "{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAnalyzr.WebApi", "src\SearchAnalyzr.WebApi\SearchAnalyzr.WebApi.csproj", "{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web API", "Web API", "{4339CF10-0BB2-4304-9753-B88CB1B81D78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DD02CBE-00DF-489F-A099-783900B66754}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAnalyzr.UnitTests", "src\SearchAnalyzr.UnitTests\SearchAnalyzr.UnitTests.csproj", "{825FFFA8-BB7F-477E-84D7-D519EC54D199}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAnalyzr.IntegrationTests", "src\SearchAnalyzr.IntegrationTests\SearchAnalyzr.IntegrationTests.csproj", "{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF UI", "WPF UI", "{9FFE200B-E079-4F02-9157-716401D328B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAnalyzr.Wpf", "src\SearchAnalyzr.Wpf\SearchAnalyzr.Wpf.csproj", "{993A89F1-7B04-438F-A3D9-61785C738269}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +27,27 @@ Global
 		{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{825FFFA8-BB7F-477E-84D7-D519EC54D199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{825FFFA8-BB7F-477E-84D7-D519EC54D199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{825FFFA8-BB7F-477E-84D7-D519EC54D199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{825FFFA8-BB7F-477E-84D7-D519EC54D199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993A89F1-7B04-438F-A3D9-61785C738269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993A89F1-7B04-438F-A3D9-61785C738269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993A89F1-7B04-438F-A3D9-61785C738269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993A89F1-7B04-438F-A3D9-61785C738269}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B745AB1-A378-4B47-AAB3-D1CAD1FC75E5} = {4339CF10-0BB2-4304-9753-B88CB1B81D78}
+		{825FFFA8-BB7F-477E-84D7-D519EC54D199} = {7DD02CBE-00DF-489F-A099-783900B66754}
+		{E23C9C30-7ED5-4B0F-9C9A-0C8879B72288} = {7DD02CBE-00DF-489F-A099-783900B66754}
+		{993A89F1-7B04-438F-A3D9-61785C738269} = {9FFE200B-E079-4F02-9157-716401D328B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA89B9B2-A4A5-458A-B690-36307900AA9E}
