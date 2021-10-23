@@ -1,5 +1,5 @@
-﻿using SearchAnalyzr.WebApi.Interfaces;
-using SearchAnalyzr.WebApi.Models;
+﻿using Microsoft.Extensions.Logging;
+using SearchAnalyzr.WebApi.Interfaces;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -11,12 +11,14 @@ namespace SearchAnalyzr.WebApi.Services
     public class SearchService : ISearchService
     {
         private HttpClient _client;
+        private readonly ILogger<SearchService> _logger;
         private const int numberOfResults = 100;
-        public SearchService(HttpClient client)
+        public SearchService(HttpClient client, ILogger<SearchService> logger)
         {
             _client = client;
             _client.Timeout = new TimeSpan(0, 0, 20);
             _client.DefaultRequestHeaders.Clear();
+            _logger = logger;
         }
         public async Task<string> QueryAsync(string keywords, CancellationToken cancellationToken)
         {
@@ -28,7 +30,13 @@ namespace SearchAnalyzr.WebApi.Services
                     HttpCompletionOption.ResponseHeadersRead,
                     cancellationToken);
 
-            return response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "";
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogError("Google search failed", response);
+                throw new HttpRequestException("Service not available. Please try again later.", null, System.Net.HttpStatusCode.ServiceUnavailable);
+            }
+
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
