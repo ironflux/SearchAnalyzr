@@ -40,7 +40,7 @@ namespace SearchAnalyzr.WebApi.Controllers
             }
             else
             {
-                _logger.LogWarning("Mising or invalid search parameters {Params}", data);
+                _logger.LogWarning("Mising or invalid search parameters {data}", data);
                 return BadRequest(ModelState);
             }
         }

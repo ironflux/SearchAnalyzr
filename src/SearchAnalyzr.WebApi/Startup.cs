@@ -10,7 +10,7 @@ using SearchAnalyzr.WebApi.Interfaces;
 using SearchAnalyzr.WebApi.Services;
 using System;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace SearchAnalyzr.WebApi
 {
@@ -25,16 +25,15 @@ namespace SearchAnalyzr.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(setup => {
-                setup.ReturnHttpNotAcceptable = true;
-                setup.CacheProfiles.Add("SearchCacheProfile", new CacheProfile() { Duration = 60 });
-            });
+            services.AddControllers();
             
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Search Analyzr Web API", Version = "v1" });
             });
             services.AddSwaggerGen(c => { c.EnableAnnotations(); });
+
+            //[TODO] Manage configurable data (e.g. Search base URL) via AWS Systems Manager Parameter Store
 
             services.AddHttpClient<ISearchService, SearchService>(c =>
             {
@@ -66,7 +65,12 @@ namespace SearchAnalyzr.WebApi
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
+
+            //[TODO] Implement access control to API using Amazon Cognito 
+            //[TODO] Make the API more resilient using Polly (http://www.thepollyproject.org/) - e.g. retries,circuit breakers & fallbacks
 
             app.UseAuthorization();
 

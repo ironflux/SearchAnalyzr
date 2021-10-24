@@ -9,9 +9,12 @@ namespace SearchAnalyzr.WebApi
     {
         public static void Main(string[] args)
         {
+            //[TODO] Send log entries directly to AWS CloudWatch (using Serilog Sink for AWS Cloudwatch)
+
             Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .WriteTo.Console()
+            .WriteTo.File("")
             .CreateLogger();
 
             try

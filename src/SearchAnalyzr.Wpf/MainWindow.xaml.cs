@@ -18,24 +18,30 @@ namespace SearchAnalyzr.Wpf
 
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
-            lblResultsHeader.Content = "Processing ....";
-
-            HttpClient client = httpClientFactory.CreateClient();
-
-            //
-            client.BaseAddress = new Uri("http://localhost:5000");
-
-            HttpResponseMessage response = await client.PostAsJsonAsync("/api/submit", new SearchParams
+            try
             {
-                Keywords = txtKeywords.Text,
-                Url = txtUrl.Text
-            });
+                lblResultsHeader.Content = "Processing ....";
 
-            AnalyzrResult result = await response.Content.ReadFromJsonAsync<AnalyzrResult>();
+                HttpClient client = httpClientFactory.CreateClient();
 
-            txtResults.Text = Constants.vbTab + (result.Positions.Count > 0 ? string.Join(Constants.vbTab, result.Positions) : "0");
+                client.BaseAddress = new Uri("http://localhost:5000");
 
-            lblResultsHeader.Content = $"Displaying results for keywords '{txtKeywords.Text}' and URL '{txtUrl.Text}'";
+                HttpResponseMessage response = await client.PostAsJsonAsync("/api/submit", new SearchParams
+                {
+                    Keywords = txtKeywords.Text,
+                    Url = txtUrl.Text
+                });
+
+                AnalyzrResult result = await response.Content.ReadFromJsonAsync<AnalyzrResult>();
+
+                txtResults.Text = Constants.vbTab + (result.Positions.Count > 0 ? string.Join(Constants.vbTab, result.Positions) : "0");
+
+                lblResultsHeader.Content = $"Displaying results for keywords '{txtKeywords.Text}' and URL '{txtUrl.Text}'";
+            }
+            catch(Exception ex)
+            {
+                lblResultsHeader.Content = ex.Message;
+            }
         }
     }
 }
